@@ -5,6 +5,7 @@ import hero_image from "../../assets/hero_image.png";
 import hero_image_back from "../../assets/hero_image_back.png";
 import Heart from "../../assets/heart.png";
 import Calories from "../../assets/calories.png";
+import NumberCouter from "number-counter";
 import { motion } from "framer-motion";
 const Hero = () => {
   const mobile = window.innerWidth <= 768 ? true : false;
@@ -45,15 +46,21 @@ const Hero = () => {
         {/* figures */}
         <div className="figures">
           <div>
-            <span>+ 140</span>
+            <span>
+              <NumberCouter end={140} start={100} delay="3" preFix="+" />
+            </span>
             <span>experts coach</span>
           </div>
           <div>
-            <span>+ 978</span>
+            <span>
+              <NumberCouter end={198} start={158} delay="3" preFix="+" />
+            </span>
             <span>members joined</span>
           </div>
           <div>
-            <span>+ 50</span>
+            <span>
+              <NumberCouter end={50} start={30} delay="3" preFix="+" />
+            </span>
             <span>fitness programs</span>
           </div>
         </div>
