@@ -1,0 +1,17 @@
+.footer {
+  padding: 2rem;
+}
+
+.contacts {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem 2rem;
+}
+
+.contacts > div {
+  border: 1px solid white;
+}
+.contacts > img {
+  width: 3rem;
+}
