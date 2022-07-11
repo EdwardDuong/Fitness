@@ -1,7 +1,11 @@
-.footer {
+.footer-container {
   padding: 2rem;
 }
 
+.footer {
+  display: flex;
+  flex-direction: column;
+}
 .contacts {
   display: flex;
   justify-content: center;
@@ -14,4 +18,14 @@
 }
 .contacts > img {
   width: 3rem;
+  cursor: pointer;
+}
+
+.footer-blur {
+  bottom: 0;
+  left: 15%;
+  width: 26rem;
+  height: 12rem;
+  filter: blur(200px);
+  background-color: red;
 }
