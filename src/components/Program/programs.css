@@ -54,3 +54,17 @@
 .join-now > img {
   width: 1rem;
 }
+
+@media screen and (max-width: 768px) {
+  .programs-header {
+    flex-direction: column;
+    gap: 1rem;
+    font-size: x-large;
+    margin-top: 2rem;
+    align-items: center;
+    justify-content: center;
+  }
+  .programs-categories {
+    flex-direction: column;
+  }
+}

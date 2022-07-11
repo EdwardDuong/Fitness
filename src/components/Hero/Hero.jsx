@@ -7,9 +7,10 @@ import Heart from "../../assets/heart.png";
 import Calories from "../../assets/calories.png";
 import { motion } from "framer-motion";
 const Hero = () => {
+  const mobile = window.innerWidth <= 768 ? true : false;
   const transition = { type: "spring", duration: 3 };
   return (
-    <div className="hero">
+    <div className="hero" id="home">
       <div className="blur hero-blur"></div>
       <div className="left-h">
         <Header />
@@ -17,7 +18,7 @@ const Hero = () => {
         {/* the script advertisement */}
         <div className="the-best-ad">
           <motion.div
-            initial={{ left: "238px" }}
+            initial={{ left: mobile ? "178px" : "238px" }}
             whileInView={{ left: "9px" }}
             transition={transition}
           ></motion.div>
