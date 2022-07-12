@@ -3,12 +3,14 @@ import "./header.css";
 import Logo from "../../assets/logo.png";
 import Bar from "../../assets/bars.png";
 import { Link } from "react-scroll";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
   const mobible = window.innerWidth <= 768 ? true : false;
   const [menuOpen, setmenuOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="header">
-      <img className="logo" src={Logo} alt="" />
+      <img className="logo" src={Logo} alt="" onClick={() => navigate("/")} />
       {menuOpen === false && mobible === true ? (
         <div style={{ background: "var(--appColor)", padding: "0.3rem" }}>
           <img
@@ -21,44 +23,56 @@ const Header = () => {
       ) : (
         <ul className="header-menu">
           <li>
-            <Link to="home" onClick={() => setmenuOpen(false)} smooth={true}>
+            <Link
+              to="home"
+              onClick={() => navigate("/") && setmenuOpen(false)}
+              smooth={true}
+              span="true"
+            >
               Home
             </Link>
           </li>
           <li>
             <Link
-              onClick={() => setmenuOpen(false)}
+              onClick={() => navigate("/") && setmenuOpen(false)}
               smooth={true}
               to="programs"
+              span="true"
             >
               Programs
             </Link>
           </li>
           <li>
-            <Link onClick={() => setmenuOpen(false)} smooth={true} to="reasons">
+            <Link
+              onClick={() => navigate("/") && setmenuOpen(false)}
+              smooth={true}
+              to="reasons"
+              span="true"
+            >
               Why us
             </Link>
           </li>
           <li>
             <Link
-              onClick={() => setmenuOpen(false)}
+              onClick={() => navigate("/") && setmenuOpen(false)}
               to="plans"
               smooth={true}
-              span={true}
+              span="true"
             >
               Plans
             </Link>
           </li>
           <li>
             <Link
-              onClick={() => setmenuOpen(false)}
+              onClick={() => navigate("/") && setmenuOpen(false)}
               to="testimonials"
-              span={true}
+              span="true"
               smooth={true}
             >
               Testimonials
             </Link>
           </li>
+          <li onClick={() => navigate("/nutri")}>Nutrition centre</li>
         </ul>
       )}
     </div>

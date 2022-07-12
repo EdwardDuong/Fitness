@@ -1,22 +1,15 @@
 import "./App.css";
-import Hero from "./components/Hero/Hero";
-import Join from "./components/Join/Join";
-import Plans from "./components/Plans/Plans";
-import Programs from "./components/Program/Programs";
-import Reason from "./components/Reason/Reason";
-import Testimonials from "./components/Testimonials/Testimonials";
-import Footer from "./components/Footer/Footer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home/Home";
+import NutritionCentre from "./pages/NutritionCentre/NutritionCentre";
 function App() {
   return (
-    <div className="App">
-      <Hero />
-      <Programs />
-      <Reason />
-      <Plans />
-      <Testimonials />
-      <Join />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/nutri" element={<NutritionCentre />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

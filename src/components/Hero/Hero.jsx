@@ -15,7 +15,6 @@ const Hero = () => {
       <div className="blur hero-blur"></div>
       <div className="left-h">
         <Header />
-
         {/* the script advertisement */}
         <div className="the-best-ad">
           <motion.div
@@ -74,8 +73,6 @@ const Hero = () => {
 
       {/* right side of the hero */}
       <div className="right-h">
-        <button className="btn">Join Now</button>
-
         {/* heart-rate  */}
         <motion.div
           className="heart-rate"
