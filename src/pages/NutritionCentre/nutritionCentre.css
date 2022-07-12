@@ -69,9 +69,26 @@
   left: 0.3rem;
 }
 .log-out {
-  background-color: var(--appColor);
-  color: white;
   position: absolute;
   top: 5rem;
   right: 7rem;
+  border-radius: 10%;
+  background-color: gray;
+  color: white;
+  border: none;
+}
+.log-out > p {
+  padding: 0.8rem 1.5rem;
+  justify-content: space-around;
+  border: 2px solid var(--orange);
+  color: white;
+  background-color: transparent;
+
+  border: none;
+}
+.log-out > p:hover {
+  background: var(--planCard);
+  cursor: pointer;
+  color: white;
+  background-color: var(--orange);
 }

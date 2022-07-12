@@ -5,7 +5,7 @@ import Bar from "../../assets/bars.png";
 import { Link } from "react-scroll";
 import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const mobible = window.innerWidth <= 768 ? true : false;
+  const mobible = window.innerWidth <= 1000 ? true : false;
   const [menuOpen, setmenuOpen] = useState(false);
   const navigate = useNavigate();
   return (

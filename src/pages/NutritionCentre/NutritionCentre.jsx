@@ -10,7 +10,9 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { app } from "../../firebase.config";
 import { useStateValue } from "../../components/context/StateProvider";
 import { actionType } from "../../components/context/reducer";
+import { useState } from "react";
 const NutritionCentre = () => {
+  const [isMenu, setMenu] = useState(false);
   const auth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const [{ user }, dispatch] = useStateValue();
@@ -22,6 +24,8 @@ const NutritionCentre = () => {
       } = await signInWithPopup(auth, provider);
       dispatch({ type: actionType.SET_USER, user: providerData[0] });
       localStorage.setItem("user", JSON.stringify(providerData[0]));
+    } else {
+      setMenu(!isMenu);
     }
   };
   return (
@@ -45,14 +49,21 @@ const NutritionCentre = () => {
               whileTap={{ scale: "0.6" }}
               onClick={login}
             />
-            <div className="log-out">
-              <p>
-                New Item <MdAdd />
-              </p>
-              <p>
-                Log out <MdLogout />
-              </p>
-            </div>
+            {isMenu && (
+              <motion.div
+                className="log-out"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.6 }}
+              >
+                <p>
+                  New Item <MdAdd />
+                </p>
+                <p>
+                  Log out <MdLogout />
+                </p>
+              </motion.div>
+            )}
           </div>
         </div>
         <List />
