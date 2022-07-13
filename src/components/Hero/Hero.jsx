@@ -7,9 +7,39 @@ import Heart from "../../assets/heart.png";
 import Calories from "../../assets/calories.png";
 import NumberCouter from "number-counter";
 import { motion } from "framer-motion";
+import { BsCart4 } from "react-icons/bs";
+import { MdAdd, MdLogout } from "react-icons/md";
+import Avata from "../../assets/nutri_img/avatar.png";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from "../../firebase.config";
+import { useStateValue } from "../../components/context/StateProvider";
+import { actionType } from "../../components/context/reducer";
+import { useState } from "react";
 const Hero = () => {
   const mobile = window.innerWidth <= 768 ? true : false;
   const transition = { type: "spring", duration: 3 };
+
+  const [isMenu, setMenu] = useState(false);
+  const auth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const [{ user }, dispatch] = useStateValue();
+
+  const login = async () => {
+    if (!user) {
+      const {
+        user: { refreshToken, providerData },
+      } = await signInWithPopup(auth, provider);
+      dispatch({ type: actionType.SET_USER, user: providerData[0] });
+      localStorage.setItem("user", JSON.stringify(providerData[0]));
+    } else {
+      setMenu(!isMenu);
+    }
+  };
+  const logout = () => {
+    setMenu(false);
+    localStorage.clear();
+    dispatch({ type: actionType.SET_USER, user: null });
+  };
   return (
     <div className="hero" id="home">
       <div className="blur hero-blur"></div>
@@ -74,6 +104,41 @@ const Hero = () => {
       {/* right side of the hero */}
       <div className="right-h">
         {/* heart-rate  */}
+        <div className="user-container">
+          {user && (
+            <motion.div className="shopping-cart" whileTap={{ scale: 0.8 }}>
+              <BsCart4 />
+              <div className="cart-count">
+                <p>2</p>
+              </div>
+            </motion.div>
+          )}
+          <div className="user">
+            <motion.img
+              src={user ? user.photoURL : Avata}
+              alt=""
+              className="avata"
+              whileTap={{ scale: "0.6" }}
+              onClick={login}
+            />
+            {!user && <p>Login</p>}
+            {isMenu && (
+              <motion.div
+                className="log-out"
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.6 }}
+              >
+                <p>
+                  New Item <MdAdd />
+                </p>
+                <p onClick={logout}>
+                  Log out <MdLogout />
+                </p>
+              </motion.div>
+            )}
+          </div>
+        </div>
         <motion.div
           className="heart-rate"
           initial={{ right: "-1rem" }}

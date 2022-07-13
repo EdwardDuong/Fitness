@@ -95,7 +95,83 @@
   position: relative;
   background-color: var(--orange);
 }
+.user-container {
+  display: absolute;
+}
+.user {
+  position: relative;
+}
+.user > p {
+  position: absolute;
+  top: 4rem;
+  right: 2rem;
+  color: white;
+}
+.log-out {
+  position: absolute;
+}
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.shopping-cart > :nth-child(1) {
+  position: absolute;
+  width: 2rem;
+  font-size: 2rem;
+  cursor: pointer;
+  top: 4rem;
+  right: 9rem;
+}
 
+.avata {
+  width: 5rem;
+  position: absolute;
+  right: 3rem;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.cart-count {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  right: -13rem;
+  top: 3rem;
+}
+.cart-count > p {
+  position: absolute;
+  top: -1rem;
+  left: 0.3rem;
+}
+.log-out {
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+  border-radius: 10%;
+  background-color: gray;
+  color: white;
+  border: none;
+}
+.log-out > p {
+  padding: 0.8rem 1.5rem;
+  justify-content: space-around;
+  border: 2px solid var(--orange);
+  color: white;
+  background-color: transparent;
+
+  border: none;
+}
+.log-out > p:hover {
+  background: var(--planCard);
+  cursor: pointer;
+  color: white;
+  background-color: var(--orange);
+}
 .right-h > button {
   position: absolute;
   right: 3rem;
@@ -112,8 +188,8 @@
   padding: 1rem;
   border-radius: 5px;
   position: absolute;
-  right: 4rem;
-  top: 7rem;
+  left: 14rem;
+  top: 15rem;
 }
 .heart-rate > img {
   width: 2rem;
