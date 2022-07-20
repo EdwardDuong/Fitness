@@ -2,7 +2,34 @@ import React from "react";
 import "./plans.css";
 import { plansData } from "../../data/plansData";
 import whiteTick from "../../assets/whiteTick.png";
+import InjectedCheckoutForm from "../ultis/payment";
+import { loadStripe } from "@stripe/stripe-js";
+
+let stripePromise;
+const getStripe = () => {
+  if (!stripePromise) {
+    console.log(process.env.STRIPEKEY);
+    stripePromise = loadStripe(process.env.STRIPEKEY);
+  }
+  return stripePromise;
+};
 const Plans = () => {
+  const item = {
+    price: "price_1LNUxIFsfyYLdIast1lNsY7W",
+    quantity: 1,
+  };
+  const checkoutOptions = {
+    lineItems: [item],
+    mode: "subscription",
+    successUrl: `${window.location.origin}/success`,
+    cancelUrl: `${window.location.origin}/cancel`,
+  };
+  const redirectCheckout = async () => {
+    console.log("redirectToCheckOut");
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout(checkoutOptions);
+    console.log("stripe error", error);
+  };
   return (
     <div className="plans-container" id="plans">
       <div className="blur plans-blur-1"></div>
@@ -28,7 +55,9 @@ const Plans = () => {
               ))}
             </div>
             <span>See more details -> </span>
-            <button className="btn">Join now</button>
+            <button className="btn" onClick={redirectCheckout}>
+              Join now
+            </button>
           </div>
         ))}
       </div>

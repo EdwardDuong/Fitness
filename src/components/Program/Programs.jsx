@@ -3,6 +3,24 @@ import "./programs.css";
 import { programsData } from "../../data/programsData";
 import RightArrow from "../../assets/rightArrow.png";
 const Programs = () => {
+  const checkout = (id) => {
+    fetch("/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Context-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items: [{ id: { id }, quantity: 1 }],
+      }),
+    })
+      .then((res) => {
+        if (res.ok) return res.json();
+        return res.json().then((json) => Promise.reject(json));
+      })
+      .then(({ url }) => {
+        window.location = url;
+      });
+  };
   return (
     <div className="Programs" id="programs">
       {/* header */}
@@ -18,7 +36,7 @@ const Programs = () => {
             <span>{program.heading}</span>
             <span>{program.details}</span>
             <div className="join-now">
-              <span>Join Now</span>
+              <span onClick={checkout}>Join Now</span>
               <img src={RightArrow} alt="" />
             </div>
           </div>
