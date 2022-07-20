@@ -4,16 +4,20 @@ import { plansData } from "../../data/plansData";
 import whiteTick from "../../assets/whiteTick.png";
 import InjectedCheckoutForm from "../ultis/payment";
 import { loadStripe } from "@stripe/stripe-js";
+import { useState } from "react";
 
 let stripePromise;
 const getStripe = () => {
   if (!stripePromise) {
-    console.log(process.env.STRIPEKEY);
-    stripePromise = loadStripe(process.env.STRIPEKEY);
+    stripePromise = loadStripe(
+      "pk_test_51LNUsEFsfyYLdIas0dCHq3o4YVTNpKwtoe9KaNxfz3GaN34INtAESNJDF3spTGKZDFVjygb7AzMF15u1WhavUWXk00CTJRtk2p"
+    );
   }
   return stripePromise;
 };
 const Plans = () => {
+  const [stripeError, setStripeError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const item = {
     price: "price_1LNUxIFsfyYLdIast1lNsY7W",
     quantity: 1,
@@ -25,11 +29,15 @@ const Plans = () => {
     cancelUrl: `${window.location.origin}/cancel`,
   };
   const redirectCheckout = async () => {
+    setLoading(true);
     console.log("redirectToCheckOut");
     const stripe = await getStripe();
     const { error } = await stripe.redirectToCheckout(checkoutOptions);
     console.log("stripe error", error);
+    if (error) setStripeError(error.message);
+    setLoading(false);
   };
+  if (stripeError) alert(stripeError);
   return (
     <div className="plans-container" id="plans">
       <div className="blur plans-blur-1"></div>
@@ -55,8 +63,12 @@ const Plans = () => {
               ))}
             </div>
             <span>See more details -> </span>
-            <button className="btn" onClick={redirectCheckout}>
-              Join now
+            <button
+              className="btn"
+              onClick={redirectCheckout}
+              disabled={loading}
+            >
+              {loading ? "loading..." : "Join now"}
             </button>
           </div>
         ))}
