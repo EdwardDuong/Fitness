@@ -7,8 +7,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 Built using:
 
 - Front-end library: React
-- CSS framework: React-bootstrap
-- CSS animations library: Animate.css
+- CSS framework: React
+- CSS animations library: framer-motion
 
 ## Available Scripts
 
